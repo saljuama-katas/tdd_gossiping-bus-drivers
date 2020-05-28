@@ -1,9 +1,7 @@
 def gossip(routes):
-    if len(routes) < 2:
-        return None
-
-    for x in range(3):
-        if routes[0][x] == routes[1][x]:
-            return x
+    if len(routes) > 1:
+        for x in range(480):
+            if routes[0][x % len(routes[0])] == routes[1][x % len(routes[1])]:
+                return x
 
     return None
