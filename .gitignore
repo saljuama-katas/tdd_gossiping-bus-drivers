@@ -1,6 +1,9 @@
 ### Virtual Environment ###
 .venv/
 
+### PyTest ###
+.pytest_cache/
+
 ### IDEs ###
 .idea/
 .vscode/
