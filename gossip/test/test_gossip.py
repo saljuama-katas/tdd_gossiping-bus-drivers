@@ -33,3 +33,21 @@ def test_drivers_drive_a_maximum_of_480_stops():
 
     calculator = GossipCalculator([[481, 1000], list(range(1, 482))])
     assert calculator.gossip_spread_time() is None
+
+
+def test_gossip_never_spreads_if_one_driver_does_not_get_all_gossips():
+    calculator = GossipCalculator([
+        [1, 2, 3],
+        [1, 3, 4],
+        [7, 8, 9]
+    ])
+    assert calculator.gossip_spread_time() is None
+
+
+def test_gossip_can_be_spread_without_direct_contact():
+    calculator = GossipCalculator([
+        [1, 2, 3],   # learns about 2 in stop 0, learns about 3 in stop 3 (via driver 2)
+        [1, 3, 4],   # learns about 1 in stop 0, learns about 3 in stop 1
+        [5, 3, 6]    # learns about 1 (via driver 2) and 2 in stop 1
+    ])
+    assert calculator.gossip_spread_time() == 3
