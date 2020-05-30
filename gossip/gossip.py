@@ -1,7 +1,16 @@
 def gossip(routes):
-    if len(routes) > 1:
+    drivers = [BusDriver(route) for route in routes]
+    if len(drivers) > 1:
         for x in range(480):
-            if routes[0][x % len(routes[0])] == routes[1][x % len(routes[1])]:
+            if drivers[0].stop_at_minute(x) == drivers[1].stop_at_minute(x):
                 return x
 
     return None
+
+
+class BusDriver:
+    def __init__(self, route):
+        self.route = route
+
+    def stop_at_minute(self, minute):
+        return self.route[minute % len(self.route)]
